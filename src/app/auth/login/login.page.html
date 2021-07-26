@@ -1,0 +1,53 @@
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col [size]="12">
+
+        <div class="ion-padding bg-primary">
+          <div class="w-100 d-flex ion-justify-content-center">
+            <img id="nucleus-logo" src="assets/nucleus-logo.png" alt="">
+          </div>
+        </div>
+
+        <div class="w-100 ion-text-center">
+          <ion-text color="dark">
+            <h3>Nucleus</h3>
+          </ion-text>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="login()" class="justify-content-center ion-padding">
+          <ion-item class="ion-margin-bottom">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input #usernameInput formControlName="email" type="text" autofocus></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Senha</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+
+          <div class="ion-padding">
+            <ion-button [disabled]="form.invalid" (click)="login()" class="fw-bold" size="block" color="secondary">
+              Entrar
+            </ion-button>
+          </div>
+        </form>
+
+        <div class="ion-padding">
+          <div class="w-100 ion-text-center">
+            <ion-text color="medium">
+              <span>ou</span>
+            </ion-text>
+          </div>
+        </div>
+
+        <div class="ion-padding">
+          <div class="w-100 ion-padding">
+            <ion-button class="fw-bold" size="block" color="success">Criar nova conta</ion-button>
+          </div>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
