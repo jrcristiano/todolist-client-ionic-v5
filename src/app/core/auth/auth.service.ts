@@ -1,3 +1,4 @@
+import { User } from './../models/user';
 import { UserService } from './../user/user.service';
 import { TokenService } from './../token/token.service';
 import { environment } from '../../../environments/environment';
@@ -7,18 +8,19 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+const api = environment.api_url;
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     private tokenService: TokenService,
     private userService: UserService) { }
 
   authenticate(username: string, password: string): Observable<Oauth> {
-    const api = environment.api_url;
-
     return this.http.post<Oauth>(api + '/oauth/token', {
       username,
       password,
@@ -30,7 +32,11 @@ export class AuthService {
     .pipe(tap(res => {
       const token = res.access_token;
       this.tokenService.setToken(token);
-      this.userService.authorizeUser();
+      this.userService.putAuthenticatedUserAtLocalStorage();
     }));
+  }
+
+  register(userData: User): Observable<any> {
+    return this.http.post<User>(api + '/api/users', userData);
   }
 }

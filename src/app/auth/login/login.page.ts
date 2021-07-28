@@ -1,3 +1,4 @@
+import { User } from './../../core/models/user';
 import { AuthService } from '../../core/auth/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -13,10 +14,12 @@ export class LoginPage implements OnInit {
   form!: FormGroup;
   @ViewChild('usernameInput') usernameInput: IonInput;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private authService: AuthService,
     private navController: NavController,
-    private alertController: AlertController) { }
+    private alertController: AlertController
+  ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -35,12 +38,11 @@ export class LoginPage implements OnInit {
 
   login() {
     if (this.form.valid) {
-      const username = this.form.get('email').value;
-      const password = this.form.get('password').value;
+      const { email, password } = this.form.getRawValue() as User;
 
-      this.authService.authenticate(username, password)
+      this.authService.authenticate(email, password)
         .subscribe(
-          (res) => {
+          () => {
             this.navController.navigateForward('home');
             this.form.reset();
           },

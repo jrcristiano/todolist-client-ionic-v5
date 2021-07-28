@@ -16,7 +16,7 @@ export class Request implements HttpInterceptor {
           'Content-Type': 'application/json; charset=utf-8',
           'Authorization': `Bearer ${token}`
         }
-      })
+      });
     }
     return next.handle(req);
   }

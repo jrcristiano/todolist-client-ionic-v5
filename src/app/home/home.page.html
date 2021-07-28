@@ -31,17 +31,8 @@
 
     <ion-content>
       <ion-list>
-        <ion-item (click)="openEnd()" routerLink="/home" routerLinkActive="active">
-          <ion-icon class="ion-padding-end" name="home-outline"></ion-icon> Home
-        </ion-item>
-        <ion-item (click)="openEnd()">
-          <ion-icon class="ion-padding-end" name="bulb-outline"></ion-icon> Tarefas a fazer
-        </ion-item>
-        <ion-item (click)="openEnd()">
-          <ion-icon class="ion-padding-end" name="brush-outline"></ion-icon> Tarefas em execução
-        </ion-item>
-        <ion-item (click)="openEnd()">
-          <ion-icon class="ion-padding-end" name="checkmark-done-outline"></ion-icon> Tarefas concluídas
+        <ion-item *ngFor="let item of menuList" (click)="openEnd()" [routerLink]="item.url">
+          <ion-icon class="ion-padding-end" [name]="item.icon"></ion-icon> {{ item.title }}
         </ion-item>
         <ion-item (click)="presentAlertConfirm()">
           <ion-icon class="ion-padding-end" name="log-out-outline"></ion-icon> Sair
@@ -54,7 +45,19 @@
     <ion-fab-button color="success">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list side="top">
+
+      <ion-fab-button color="warning">
+        <ion-icon name="bulb-outline"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button color="tertiary">
+        <ion-icon name="list-outline"></ion-icon>
+      </ion-fab-button>
+
+    </ion-fab-list>
   </ion-fab>
+
 
   <ion-router-outlet id="main"></ion-router-outlet>
 

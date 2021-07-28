@@ -1,7 +1,7 @@
 import { TokenService } from './../core/token/token.service';
 import { Router } from '@angular/router';
 import { UserService } from './../core/user/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuController, AlertController } from '@ionic/angular';
 
 @Component({
@@ -12,6 +12,14 @@ import { MenuController, AlertController } from '@ionic/angular';
 export class HomePage {
 
   public showSearch = false;
+  public menuList = [
+    {url: '/home', icon: 'home-outline', title: 'Home'},
+    {url: '/ideas', icon: 'bulb-outline', title: 'Ideias'},
+    {url: '/todo', icon: 'clipboard-outline', title: 'Tarefas a fazer'},
+    {url: '/doing', icon: 'brush-outline', title: 'Tarefas em execução'},
+    {url: '/done', icon: 'checkmark-done-outline', title: 'Tarefas concluídas'},
+    {url: '/config', icon: 'cog-outline', title: 'Configurações'},
+  ];
 
   constructor(
     private menu: MenuController,
@@ -60,7 +68,8 @@ export class HomePage {
   logout() {
     this.tokenService.removeToken();
     this.userService.removeUser();
-    this.router.navigate(['login']);
+    this.openEnd();
+    this.router.navigate(['/auth']);
   }
 
 }

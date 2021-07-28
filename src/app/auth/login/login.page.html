@@ -3,19 +3,9 @@
     <ion-row>
       <ion-col [size]="12">
 
-        <div class="ion-padding bg-primary">
-          <div class="w-100 d-flex ion-justify-content-center">
-            <img id="nucleus-logo" src="assets/nucleus-logo.png" alt="">
-          </div>
-        </div>
+        <app-nucleus-header></app-nucleus-header>
 
-        <div class="w-100 ion-text-center">
-          <ion-text color="dark">
-            <h3>Nucleus</h3>
-          </ion-text>
-        </div>
-
-        <form [formGroup]="form" (ngSubmit)="login()" class="justify-content-center ion-padding">
+        <form [formGroup]="form" class="justify-content-center ion-padding">
           <ion-item class="ion-margin-bottom">
             <ion-label position="floating">Email</ion-label>
             <ion-input #usernameInput formControlName="email" type="text" autofocus></ion-input>
@@ -43,7 +33,7 @@
 
         <div class="ion-padding">
           <div class="w-100 ion-padding">
-            <ion-button class="fw-bold" size="block" color="success">Criar nova conta</ion-button>
+            <ion-button routerLink="/register" class="fw-bold" size="block" color="success">Criar nova conta</ion-button>
           </div>
         </div>
 

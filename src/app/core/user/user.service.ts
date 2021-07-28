@@ -13,10 +13,9 @@ export class UserService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-  authorizeUser() {
+  putAuthenticatedUserAtLocalStorage() {
     if (this.tokenService.hasToken()) {
       const AuthenticatedUserApi = environment.api_url + '/api/v1/authenticated';
-
 
       this.http.get(AuthenticatedUserApi).subscribe((res: User) => {
         this.setUser(JSON.stringify(res));
