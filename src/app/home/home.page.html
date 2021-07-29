@@ -31,6 +31,15 @@
 
     <ion-content>
       <ion-list>
+        <ion-item>
+          <div>
+            <ion-text color="dark">
+              <h3 class="fw-bold">
+                Olá, {{ user?.name }}!
+              </h3>
+            </ion-text>
+          </div>
+        </ion-item>
         <ion-item *ngFor="let item of menuList" (click)="openEnd()" [routerLink]="item.url">
           <ion-icon class="ion-padding-end" [name]="item.icon"></ion-icon> {{ item.title }}
         </ion-item>
@@ -62,5 +71,23 @@
   <ion-router-outlet id="main"></ion-router-outlet>
 
   <ion-searchbar *ngIf="showSearch" debounce="500" enterkeyhint="enter" type="search" spellcheck #input></ion-searchbar>
+
+<ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+  <ion-reorder *ngFor="let todo of todos">
+    <ion-item>
+      <ion-label>
+        {{ todo.title }}
+      </ion-label>
+    </ion-item>
+  </ion-reorder>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-reorder-group>
+
 
 </ion-content>
