@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { UserService } from './../core/user/user.service';
 import { Component, ViewChild } from '@angular/core';
 import { MenuController, AlertController, IonReorderGroup, IonInfiniteScroll } from '@ionic/angular';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-home',
@@ -88,8 +87,9 @@ export class HomePage {
 
   doReorder(ev: CustomEvent) {
     let { from, to } = ev.detail;
-    from += 1;
-    to += 1;
+
+    from = this.todos[from].id;
+    to = this.todos[to].id;
 
     if (from < to) {
       this.todoService.updateByDragUpDown({from, to});

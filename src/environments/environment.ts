@@ -7,7 +7,7 @@ export const environment = {
   api_url: 'http://localhost:8000',
 
   api_client_id: 2,
-  api_client_secret: 'OHkXzFW6CpeEKD8q0qIHzu3KXsJ9v3hmpqEm0YDL',
+  api_client_secret: 'znD754TnW8PKq57iDSG3uerdQ8fJJpWrMLddhLik',
   api_grant_type: 'password',
   api_scope: ''
 };
