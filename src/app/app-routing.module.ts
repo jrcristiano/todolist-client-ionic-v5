@@ -9,13 +9,17 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)
+  },
+  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     canActivate: [AuthGuard]
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)
+    path: 'create/todo',
+    loadChildren: () => import('./todos/todo-form/todo-form.module').then( m => m.TodoFormPageModule)
   }
 ];
 

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from './../core/user/user.service';
 import { Component, ViewChild } from '@angular/core';
 import { MenuController, AlertController, IonReorderGroup, IonInfiniteScroll } from '@ionic/angular';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,6 @@ export class HomePage {
 
   @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
 
-  public showSearch = false;
   public menuList = [
     {url: '/home', icon: 'home-outline', title: 'Home'},
     {url: '/ideas', icon: 'bulb-outline', title: 'Ideias'},
@@ -87,23 +87,32 @@ export class HomePage {
   }
 
   doReorder(ev: CustomEvent) {
-    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
+    let { from, to } = ev.detail;
+    from += 1;
+    to += 1;
+
+    if (from < to) {
+      this.todoService.updateByDragUpDown({from, to});
+      console.log('chama o método que subtrai');
+    }
+
+    if (from > to) {
+      this.todoService.updateByDragDownUp({from, to});
+      console.log('chama o método que soma');
+    }
+
     ev.detail.complete();
   }
 
   loadData(event) {
     setTimeout(() => {
-      const skip = this.todos.length + 15;
+      const skip = this.todos.length;
       this.todoService.getOnDemandTasks(skip).subscribe(todos => {
         this.todos = this.todos.concat(todos);
       });
 
       event.target.complete();
     }, 500);
-  }
-
-  toggleInfiniteScroll() {
-    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
   logout() {
