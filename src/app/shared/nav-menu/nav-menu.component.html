@@ -1,0 +1,19 @@
+<ion-list>
+  <ion-item>
+    <div>
+      <ion-text color="dark">
+        <h3 class="fw-bold ion-padding-bottom">
+          Olá, {{ user?.name }}!
+        </h3>
+      </ion-text>
+    </div>
+  </ion-item>
+
+  <ion-item *ngFor="let item of menuList" (click)="openEnd()" [routerLink]="item.url">
+    <ion-icon class="ion-padding-end" [name]="item.icon"></ion-icon> {{ item.title }}
+  </ion-item>
+
+  <ion-item (click)="presentAlertConfirm()">
+    <ion-icon class="ion-padding-end" name="log-out-outline"></ion-icon> Sair
+  </ion-item>
+</ion-list>

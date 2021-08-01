@@ -18,7 +18,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'create/todo',
+    path: 'todo-form',
     loadChildren: () => import('./todos/todo-form/todo-form.module').then( m => m.TodoFormPageModule)
   }
 ];
